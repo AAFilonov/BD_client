@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf1a38091e7b4ca4af22171f4ba470a7" Name="Diagram1">
+        <EntityTypeShape EntityType="MyBDModel.Adress" Width="1.5" PointX="13" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Client" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Con_point" Width="1.5" PointX="15.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Legal_entity" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Region" Width="1.5" PointX="10.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Service_Net" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Service_Other" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Service_Other_Type" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Service_TV" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Tariff" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Tv_bundle" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Tv_bundle_channel" Width="1.5" PointX="9.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Tv_channel" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Tv_Service_bundle" Width="1.5" PointX="9.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Type_Cl" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.Сontract_table" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.View_Client_Services" Width="1.5" PointX="2.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBDModel.View_legal_entities" Width="1.5" PointX="4.75" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="MyBDModel.FK_Adr_info_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_Con_point_Adr_info" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_CL_LE" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_Cl_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_CON_CL" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_ServNet_Contr" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_ServNet_Tariff" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_Other_ServOther_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_ServOther_Contr" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_ServOther_Tariff" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_ServTV_Contr" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_ServTV_Tariff" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_TV_ServChan_Serv" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_TV_BundChan_Bundle" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_TV_ServChan_Bundle" ManuallyRouted="false" />
+        <AssociationConnector Association="MyBDModel.FK_TV_BundChan_Channel" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

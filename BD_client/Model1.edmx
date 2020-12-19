@@ -1,0 +1,1337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MyBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adress">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="region" Type="int" Nullable="false" />
+          <Property Name="local_adr" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="passport_Num" Type="nchar" MaxLength="6" />
+          <Property Name="passport_Seria" Type="nchar" MaxLength="4" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="legal_entity" Type="int" />
+          <Property Name="email" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Con_point">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adress" Type="int" />
+        </EntityType>
+        <EntityType Name="Legal_entity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="BIK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="Bank_account" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service_Net">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contract" Type="int" Nullable="false" />
+          <Property Name="tariff" Type="int" Nullable="false" />
+          <Property Name="ip_v4" Type="nchar" MaxLength="16" />
+          <Property Name="ip_v6" Type="nchar" MaxLength="39" />
+        </EntityType>
+        <EntityType Name="Service_Other">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contract" Type="int" Nullable="false" />
+          <Property Name="tariff" Type="int" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service_Other_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Service_TV">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contract" Type="int" Nullable="false" />
+          <Property Name="tariff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tariff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="price" Type="money" />
+        </EntityType>
+        <EntityType Name="Tv_bundle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tv_bundle_channel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="channel" Type="int" Nullable="false" />
+          <Property Name="bundle" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tv_channel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tv_Service_bundle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service" Type="int" Nullable="false" />
+          <Property Name="bundle" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_Cl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сontract_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client" Type="int" />
+          <Property Name="Date_Begin" Type="date" />
+          <Property Name="Date_End" Type="date" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyBD.dbo.View_Client_Services" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="View_Client_Services">
+          <Key>
+            <PropertyRef Name="Клиент" />
+            <PropertyRef Name="Номер договора" />
+          </Key>
+          <Property Name="Клиент" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Номер договора" Type="int" Nullable="false" />
+          <Property Name="Номер Net" Type="int" />
+          <Property Name="Номер других услуг" Type="int" />
+          <Property Name="Номер TV" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyBD.dbo.View_legal_entities" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="View_legal_entities">
+          <Key>
+            <PropertyRef Name="Организация" />
+            <PropertyRef Name="Представитель" />
+            <PropertyRef Name="БИК" />
+            <PropertyRef Name="Номер Счета" />
+            <PropertyRef Name="Номер договора" />
+          </Key>
+          <Property Name="Организация" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="Представитель" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="БИК" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="Номер Счета" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Номер договора" Type="int" Nullable="false" />
+          <Property Name="Дата подписания" Type="date" />
+          <Property Name="Дата окнчания" Type="date" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "MyBD.dbo.View_phisical_personcs_contracts" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="View_phisical_personcs_contracts">
+          <Property Name="Клиент" Type="nvarchar" MaxLength="100" />
+          <Property Name="Номер паспорта" Type="nchar" MaxLength="6" />
+          <Property Name="Серия паспорта" Type="nchar" MaxLength="4" />
+          <Property Name="Номер договора" Type="int" />
+        </EntityType>-->
+        <Association Name="FK_Adr_info_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Adress" Type="Self.Adress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adress">
+              <PropertyRef Name="region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CL_LE">
+          <End Role="Legal_entity" Type="Self.Legal_entity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Legal_entity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="legal_entity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cl_Type">
+          <End Role="Type_Cl" Type="Self.Type_Cl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Cl">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CON_CL">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сontract_table">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Con_point_Adr_info">
+          <End Role="Adress" Type="Self.Adress" Multiplicity="0..1" />
+          <End Role="Con_point" Type="Self.Con_point" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Con_point">
+              <PropertyRef Name="adress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_ServOther_Type">
+          <End Role="Service_Other_Type" Type="Self.Service_Other_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Other" Type="Self.Service_Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service_Other_Type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Other">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServNet_Contr">
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Net" Type="Self.Service_Net" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontract_table">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Net">
+              <PropertyRef Name="contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServNet_Tariff">
+          <End Role="Tariff" Type="Self.Tariff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Net" Type="Self.Service_Net" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Net">
+              <PropertyRef Name="tariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServOther_Contr">
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Other" Type="Self.Service_Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontract_table">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Other">
+              <PropertyRef Name="contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServOther_Tariff">
+          <End Role="Tariff" Type="Self.Tariff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Other" Type="Self.Service_Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Other">
+              <PropertyRef Name="tariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServTV_Contr">
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_TV" Type="Self.Service_TV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontract_table">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_TV">
+              <PropertyRef Name="contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServTV_Tariff">
+          <End Role="Tariff" Type="Self.Tariff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_TV" Type="Self.Service_TV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_TV">
+              <PropertyRef Name="tariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_BundChan_Bundle">
+          <End Role="Tv_bundle" Type="Self.Tv_bundle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_bundle_channel" Type="Self.Tv_bundle_channel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tv_bundle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_bundle_channel">
+              <PropertyRef Name="bundle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_BundChan_Channel">
+          <End Role="Tv_channel" Type="Self.Tv_channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_bundle_channel" Type="Self.Tv_bundle_channel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tv_channel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_bundle_channel">
+              <PropertyRef Name="channel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_ServChan_Bundle">
+          <End Role="Tv_bundle" Type="Self.Tv_bundle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_Service_bundle" Type="Self.Tv_Service_bundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tv_bundle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_Service_bundle">
+              <PropertyRef Name="bundle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_ServChan_Serv">
+          <End Role="Service_TV" Type="Self.Service_TV" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_Service_bundle" Type="Self.Tv_Service_bundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service_TV">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_Service_bundle">
+              <PropertyRef Name="service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddAdress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="region" Type="int" Mode="In" />
+          <Parameter Name="local_adr" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Passport_num" Type="nchar" Mode="In" />
+          <Parameter Name="Passport_seria" Type="nchar" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddConPoint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="adr" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddContract" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="client" Type="int" Mode="In" />
+          <Parameter Name="Begin_Date" Type="date" Mode="In" />
+          <Parameter Name="End_Date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Client_numData_to_nchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Function1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="count" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Gen_All_for_Contract" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="contract" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Generate_Rand_Adress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Generate_Rand_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Generate_Rand_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_count_of_conpoints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="clientid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Input_All_for_Contract" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="contract" Type="int" Mode="In" />
+          <Parameter Name="region" Type="int" Mode="In" />
+          <Parameter Name="local__adr" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Input_Natural_person_data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="client_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Passport_num" Type="nchar" Mode="In" />
+          <Parameter Name="Passport_seria" Type="nchar" Mode="In" />
+          <Parameter Name="Begin_Date" Type="date" Mode="In" />
+          <Parameter Name="End_Date" Type="date" Mode="In" />
+          <Parameter Name="region" Type="int" Mode="In" />
+          <Parameter Name="local__adr" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище MyBDModelContainer">
+          <EntitySet Name="Adress" EntityType="Self.Adress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Con_point" EntityType="Self.Con_point" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Legal_entity" EntityType="Self.Legal_entity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service_Net" EntityType="Self.Service_Net" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service_Other" EntityType="Self.Service_Other" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service_Other_Type" EntityType="Self.Service_Other_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service_TV" EntityType="Self.Service_TV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tariff" EntityType="Self.Tariff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tv_bundle" EntityType="Self.Tv_bundle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tv_bundle_channel" EntityType="Self.Tv_bundle_channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tv_channel" EntityType="Self.Tv_channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tv_Service_bundle" EntityType="Self.Tv_Service_bundle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Cl" EntityType="Self.Type_Cl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сontract_table" EntityType="Self.Сontract_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_Client_Services" EntityType="Self.View_Client_Services" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Client_Services].[Клиент] AS [Клиент], 
+    [View_Client_Services].[Номер договора] AS [Номер договора], 
+    [View_Client_Services].[Номер Net] AS [Номер Net], 
+    [View_Client_Services].[Номер других услуг] AS [Номер других услуг], 
+    [View_Client_Services].[Номер TV] AS [Номер TV]
+    FROM [dbo].[View_Client_Services] AS [View_Client_Services]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_legal_entities" EntityType="Self.View_legal_entities" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_legal_entities].[Организация] AS [Организация], 
+    [View_legal_entities].[Представитель] AS [Представитель], 
+    [View_legal_entities].[БИК] AS [БИК], 
+    [View_legal_entities].[Номер Счета] AS [Номер Счета], 
+    [View_legal_entities].[Номер договора] AS [Номер договора], 
+    [View_legal_entities].[Дата подписания] AS [Дата подписания], 
+    [View_legal_entities].[Дата окнчания] AS [Дата окнчания]
+    FROM [dbo].[View_legal_entities] AS [View_legal_entities]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Adr_info_Region" Association="Self.FK_Adr_info_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Adress" EntitySet="Adress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CL_LE" Association="Self.FK_CL_LE">
+            <End Role="Legal_entity" EntitySet="Legal_entity" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cl_Type" Association="Self.FK_Cl_Type">
+            <End Role="Type_Cl" EntitySet="Type_Cl" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CON_CL" Association="Self.FK_CON_CL">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Con_point_Adr_info" Association="Self.FK_Con_point_Adr_info">
+            <End Role="Adress" EntitySet="Adress" />
+            <End Role="Con_point" EntitySet="Con_point" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_ServOther_Type" Association="Self.FK_Other_ServOther_Type">
+            <End Role="Service_Other_Type" EntitySet="Service_Other_Type" />
+            <End Role="Service_Other" EntitySet="Service_Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServNet_Contr" Association="Self.FK_ServNet_Contr">
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+            <End Role="Service_Net" EntitySet="Service_Net" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServNet_Tariff" Association="Self.FK_ServNet_Tariff">
+            <End Role="Tariff" EntitySet="Tariff" />
+            <End Role="Service_Net" EntitySet="Service_Net" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServOther_Contr" Association="Self.FK_ServOther_Contr">
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+            <End Role="Service_Other" EntitySet="Service_Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServOther_Tariff" Association="Self.FK_ServOther_Tariff">
+            <End Role="Tariff" EntitySet="Tariff" />
+            <End Role="Service_Other" EntitySet="Service_Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServTV_Contr" Association="Self.FK_ServTV_Contr">
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+            <End Role="Service_TV" EntitySet="Service_TV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServTV_Tariff" Association="Self.FK_ServTV_Tariff">
+            <End Role="Tariff" EntitySet="Tariff" />
+            <End Role="Service_TV" EntitySet="Service_TV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_BundChan_Bundle" Association="Self.FK_TV_BundChan_Bundle">
+            <End Role="Tv_bundle" EntitySet="Tv_bundle" />
+            <End Role="Tv_bundle_channel" EntitySet="Tv_bundle_channel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_BundChan_Channel" Association="Self.FK_TV_BundChan_Channel">
+            <End Role="Tv_channel" EntitySet="Tv_channel" />
+            <End Role="Tv_bundle_channel" EntitySet="Tv_bundle_channel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_ServChan_Bundle" Association="Self.FK_TV_ServChan_Bundle">
+            <End Role="Tv_bundle" EntitySet="Tv_bundle" />
+            <End Role="Tv_Service_bundle" EntitySet="Tv_Service_bundle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_ServChan_Serv" Association="Self.FK_TV_ServChan_Serv">
+            <End Role="Service_TV" EntitySet="Service_TV" />
+            <End Role="Tv_Service_bundle" EntitySet="Tv_Service_bundle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="Function1_Result">
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Adress">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="region" Type="Int32" Nullable="false" />
+          <Property Name="local_adr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Region1" Relationship="Self.FK_Adr_info_Region" FromRole="Adress" ToRole="Region" />
+          <NavigationProperty Name="Con_point" Relationship="Self.FK_Con_point_Adr_info" FromRole="Adress" ToRole="Con_point" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passport_Num" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="passport_Seria" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="legal_entity" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Legal_entity1" Relationship="Self.FK_CL_LE" FromRole="Client" ToRole="Legal_entity" />
+          <NavigationProperty Name="Type_Cl" Relationship="Self.FK_Cl_Type" FromRole="Client" ToRole="Type_Cl" />
+          <NavigationProperty Name="Сontract_table" Relationship="Self.FK_CON_CL" FromRole="Client" ToRole="Сontract_table" />
+        </EntityType>
+        <EntityType Name="Con_point">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adress" Type="Int32" />
+          <NavigationProperty Name="Adress1" Relationship="Self.FK_Con_point_Adr_info" FromRole="Con_point" ToRole="Adress" />
+        </EntityType>
+        <EntityType Name="Legal_entity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BIK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Bank_account" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_CL_LE" FromRole="Legal_entity" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Adress" Relationship="Self.FK_Adr_info_Region" FromRole="Region" ToRole="Adress" />
+        </EntityType>
+        <EntityType Name="Service_Net">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contract" Type="Int32" Nullable="false" />
+          <Property Name="tariff" Type="Int32" Nullable="false" />
+          <Property Name="ip_v4" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <Property Name="ip_v6" Type="String" MaxLength="39" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Сontract_table" Relationship="Self.FK_ServNet_Contr" FromRole="Service_Net" ToRole="Сontract_table" />
+          <NavigationProperty Name="Tariff1" Relationship="Self.FK_ServNet_Tariff" FromRole="Service_Net" ToRole="Tariff" />
+        </EntityType>
+        <EntityType Name="Service_Other">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contract" Type="Int32" Nullable="false" />
+          <Property Name="tariff" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service_Other_Type" Relationship="Self.FK_Other_ServOther_Type" FromRole="Service_Other" ToRole="Service_Other_Type" />
+          <NavigationProperty Name="Сontract_table" Relationship="Self.FK_ServOther_Contr" FromRole="Service_Other" ToRole="Сontract_table" />
+          <NavigationProperty Name="Tariff1" Relationship="Self.FK_ServOther_Tariff" FromRole="Service_Other" ToRole="Tariff" />
+        </EntityType>
+        <EntityType Name="Service_Other_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Service_Other" Relationship="Self.FK_Other_ServOther_Type" FromRole="Service_Other_Type" ToRole="Service_Other" />
+        </EntityType>
+        <EntityType Name="Service_TV">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contract" Type="Int32" Nullable="false" />
+          <Property Name="tariff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Сontract_table" Relationship="Self.FK_ServTV_Contr" FromRole="Service_TV" ToRole="Сontract_table" />
+          <NavigationProperty Name="Tariff1" Relationship="Self.FK_ServTV_Tariff" FromRole="Service_TV" ToRole="Tariff" />
+          <NavigationProperty Name="Tv_Service_bundle" Relationship="Self.FK_TV_ServChan_Serv" FromRole="Service_TV" ToRole="Tv_Service_bundle" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tariff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Service_Net" Relationship="Self.FK_ServNet_Tariff" FromRole="Tariff" ToRole="Service_Net" />
+          <NavigationProperty Name="Service_Other" Relationship="Self.FK_ServOther_Tariff" FromRole="Tariff" ToRole="Service_Other" />
+          <NavigationProperty Name="Service_TV" Relationship="Self.FK_ServTV_Tariff" FromRole="Tariff" ToRole="Service_TV" />
+        </EntityType>
+        <EntityType Name="Tv_bundle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tv_bundle_channel" Relationship="Self.FK_TV_BundChan_Bundle" FromRole="Tv_bundle" ToRole="Tv_bundle_channel" />
+          <NavigationProperty Name="Tv_Service_bundle" Relationship="Self.FK_TV_ServChan_Bundle" FromRole="Tv_bundle" ToRole="Tv_Service_bundle" />
+        </EntityType>
+        <EntityType Name="Tv_bundle_channel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="channel" Type="Int32" Nullable="false" />
+          <Property Name="bundle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tv_bundle" Relationship="Self.FK_TV_BundChan_Bundle" FromRole="Tv_bundle_channel" ToRole="Tv_bundle" />
+          <NavigationProperty Name="Tv_channel" Relationship="Self.FK_TV_BundChan_Channel" FromRole="Tv_bundle_channel" ToRole="Tv_channel" />
+        </EntityType>
+        <EntityType Name="Tv_channel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tv_bundle_channel" Relationship="Self.FK_TV_BundChan_Channel" FromRole="Tv_channel" ToRole="Tv_bundle_channel" />
+        </EntityType>
+        <EntityType Name="Tv_Service_bundle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service" Type="Int32" Nullable="false" />
+          <Property Name="bundle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service_TV" Relationship="Self.FK_TV_ServChan_Serv" FromRole="Tv_Service_bundle" ToRole="Service_TV" />
+          <NavigationProperty Name="Tv_bundle" Relationship="Self.FK_TV_ServChan_Bundle" FromRole="Tv_Service_bundle" ToRole="Tv_bundle" />
+        </EntityType>
+        <EntityType Name="Type_Cl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Cl_Type" FromRole="Type_Cl" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Сontract_table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client" Type="Int32" />
+          <Property Name="Date_Begin" Type="DateTime" />
+          <Property Name="Date_End" Type="DateTime" />
+          <NavigationProperty Name="Client1" Relationship="Self.FK_CON_CL" FromRole="Сontract_table" ToRole="Client" />
+          <NavigationProperty Name="Service_Net" Relationship="Self.FK_ServNet_Contr" FromRole="Сontract_table" ToRole="Service_Net" />
+          <NavigationProperty Name="Service_Other" Relationship="Self.FK_ServOther_Contr" FromRole="Сontract_table" ToRole="Service_Other" />
+          <NavigationProperty Name="Service_TV" Relationship="Self.FK_ServTV_Contr" FromRole="Сontract_table" ToRole="Service_TV" />
+        </EntityType>
+        <EntityType Name="View_Client_Services">
+          <Key>
+            <PropertyRef Name="Клиент" />
+            <PropertyRef Name="Номер_договора" />
+          </Key>
+          <Property Name="Клиент" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Номер_договора" Type="Int32" Nullable="false" />
+          <Property Name="Номер_Net" Type="Int32" />
+          <Property Name="Номер_других_услуг" Type="Int32" />
+          <Property Name="Номер_TV" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_legal_entities">
+          <Key>
+            <PropertyRef Name="Организация" />
+            <PropertyRef Name="Представитель" />
+            <PropertyRef Name="БИК" />
+            <PropertyRef Name="Номер_Счета" />
+            <PropertyRef Name="Номер_договора" />
+          </Key>
+          <Property Name="Организация" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Представитель" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="БИК" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Номер_Счета" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Номер_договора" Type="Int32" Nullable="false" />
+          <Property Name="Дата_подписания" Type="DateTime" />
+          <Property Name="Дата_окнчания" Type="DateTime" />
+        </EntityType>
+        <Association Name="FK_Adr_info_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Adress" Type="Self.Adress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adress">
+              <PropertyRef Name="region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Con_point_Adr_info">
+          <End Role="Adress" Type="Self.Adress" Multiplicity="0..1" />
+          <End Role="Con_point" Type="Self.Con_point" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Con_point">
+              <PropertyRef Name="adress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CL_LE">
+          <End Role="Legal_entity" Type="Self.Legal_entity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Legal_entity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="legal_entity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cl_Type">
+          <End Role="Type_Cl" Type="Self.Type_Cl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Cl">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CON_CL">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сontract_table">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServNet_Contr">
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Net" Type="Self.Service_Net" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontract_table">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Net">
+              <PropertyRef Name="contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServNet_Tariff">
+          <End Role="Tariff" Type="Self.Tariff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Net" Type="Self.Service_Net" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Net">
+              <PropertyRef Name="tariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_ServOther_Type">
+          <End Role="Service_Other_Type" Type="Self.Service_Other_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Other" Type="Self.Service_Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service_Other_Type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Other">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServOther_Contr">
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Other" Type="Self.Service_Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontract_table">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Other">
+              <PropertyRef Name="contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServOther_Tariff">
+          <End Role="Tariff" Type="Self.Tariff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_Other" Type="Self.Service_Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_Other">
+              <PropertyRef Name="tariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServTV_Contr">
+          <End Role="Сontract_table" Type="Self.Сontract_table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_TV" Type="Self.Service_TV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontract_table">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_TV">
+              <PropertyRef Name="contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServTV_Tariff">
+          <End Role="Tariff" Type="Self.Tariff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Service_TV" Type="Self.Service_TV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tariff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service_TV">
+              <PropertyRef Name="tariff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_ServChan_Serv">
+          <End Role="Service_TV" Type="Self.Service_TV" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_Service_bundle" Type="Self.Tv_Service_bundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service_TV">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_Service_bundle">
+              <PropertyRef Name="service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_BundChan_Bundle">
+          <End Role="Tv_bundle" Type="Self.Tv_bundle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_bundle_channel" Type="Self.Tv_bundle_channel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tv_bundle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_bundle_channel">
+              <PropertyRef Name="bundle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_ServChan_Bundle">
+          <End Role="Tv_bundle" Type="Self.Tv_bundle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_Service_bundle" Type="Self.Tv_Service_bundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tv_bundle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_Service_bundle">
+              <PropertyRef Name="bundle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TV_BundChan_Channel">
+          <End Role="Tv_channel" Type="Self.Tv_channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tv_bundle_channel" Type="Self.Tv_bundle_channel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tv_channel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tv_bundle_channel">
+              <PropertyRef Name="channel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adress" EntityType="Self.Adress" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Con_point" EntityType="Self.Con_point" />
+          <EntitySet Name="Legal_entity" EntityType="Self.Legal_entity" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="Service_Net" EntityType="Self.Service_Net" />
+          <EntitySet Name="Service_Other" EntityType="Self.Service_Other" />
+          <EntitySet Name="Service_Other_Type" EntityType="Self.Service_Other_Type" />
+          <EntitySet Name="Service_TV" EntityType="Self.Service_TV" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tariff" EntityType="Self.Tariff" />
+          <EntitySet Name="Tv_bundle" EntityType="Self.Tv_bundle" />
+          <EntitySet Name="Tv_bundle_channel" EntityType="Self.Tv_bundle_channel" />
+          <EntitySet Name="Tv_channel" EntityType="Self.Tv_channel" />
+          <EntitySet Name="Tv_Service_bundle" EntityType="Self.Tv_Service_bundle" />
+          <EntitySet Name="Type_Cl" EntityType="Self.Type_Cl" />
+          <EntitySet Name="Сontract_table" EntityType="Self.Сontract_table" />
+          <EntitySet Name="View_Client_Services" EntityType="Self.View_Client_Services" />
+          <EntitySet Name="View_legal_entities" EntityType="Self.View_legal_entities" />
+          <AssociationSet Name="FK_Adr_info_Region" Association="Self.FK_Adr_info_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Adress" EntitySet="Adress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Con_point_Adr_info" Association="Self.FK_Con_point_Adr_info">
+            <End Role="Adress" EntitySet="Adress" />
+            <End Role="Con_point" EntitySet="Con_point" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CL_LE" Association="Self.FK_CL_LE">
+            <End Role="Legal_entity" EntitySet="Legal_entity" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cl_Type" Association="Self.FK_Cl_Type">
+            <End Role="Type_Cl" EntitySet="Type_Cl" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CON_CL" Association="Self.FK_CON_CL">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServNet_Contr" Association="Self.FK_ServNet_Contr">
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+            <End Role="Service_Net" EntitySet="Service_Net" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServNet_Tariff" Association="Self.FK_ServNet_Tariff">
+            <End Role="Tariff" EntitySet="Tariff" />
+            <End Role="Service_Net" EntitySet="Service_Net" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_ServOther_Type" Association="Self.FK_Other_ServOther_Type">
+            <End Role="Service_Other_Type" EntitySet="Service_Other_Type" />
+            <End Role="Service_Other" EntitySet="Service_Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServOther_Contr" Association="Self.FK_ServOther_Contr">
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+            <End Role="Service_Other" EntitySet="Service_Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServOther_Tariff" Association="Self.FK_ServOther_Tariff">
+            <End Role="Tariff" EntitySet="Tariff" />
+            <End Role="Service_Other" EntitySet="Service_Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServTV_Contr" Association="Self.FK_ServTV_Contr">
+            <End Role="Сontract_table" EntitySet="Сontract_table" />
+            <End Role="Service_TV" EntitySet="Service_TV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServTV_Tariff" Association="Self.FK_ServTV_Tariff">
+            <End Role="Tariff" EntitySet="Tariff" />
+            <End Role="Service_TV" EntitySet="Service_TV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_ServChan_Serv" Association="Self.FK_TV_ServChan_Serv">
+            <End Role="Service_TV" EntitySet="Service_TV" />
+            <End Role="Tv_Service_bundle" EntitySet="Tv_Service_bundle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_BundChan_Bundle" Association="Self.FK_TV_BundChan_Bundle">
+            <End Role="Tv_bundle" EntitySet="Tv_bundle" />
+            <End Role="Tv_bundle_channel" EntitySet="Tv_bundle_channel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_ServChan_Bundle" Association="Self.FK_TV_ServChan_Bundle">
+            <End Role="Tv_bundle" EntitySet="Tv_bundle" />
+            <End Role="Tv_Service_bundle" EntitySet="Tv_Service_bundle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TV_BundChan_Channel" Association="Self.FK_TV_BundChan_Channel">
+            <End Role="Tv_channel" EntitySet="Tv_channel" />
+            <End Role="Tv_bundle_channel" EntitySet="Tv_bundle_channel" />
+          </AssociationSet>
+          <FunctionImport Name="Function1" IsComposable="true" ReturnType="Collection(MyBDModel.Function1_Result)">
+            <Parameter Name="count" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MyBDModelContainer" CdmEntityContainer="MyBDEntities">
+          <EntitySetMapping Name="Adress">
+            <EntityTypeMapping TypeName="MyBDModel.Adress">
+              <MappingFragment StoreEntitySet="Adress">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="local_adr" ColumnName="local_adr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="MyBDModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="passport_Num" ColumnName="passport_Num" />
+                <ScalarProperty Name="passport_Seria" ColumnName="passport_Seria" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="legal_entity" ColumnName="legal_entity" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Con_point">
+            <EntityTypeMapping TypeName="MyBDModel.Con_point">
+              <MappingFragment StoreEntitySet="Con_point">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Legal_entity">
+            <EntityTypeMapping TypeName="MyBDModel.Legal_entity">
+              <MappingFragment StoreEntitySet="Legal_entity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="BIK" ColumnName="BIK" />
+                <ScalarProperty Name="Bank_account" ColumnName="Bank_account" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="MyBDModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service_Net">
+            <EntityTypeMapping TypeName="MyBDModel.Service_Net">
+              <MappingFragment StoreEntitySet="Service_Net">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="tariff" ColumnName="tariff" />
+                <ScalarProperty Name="ip_v4" ColumnName="ip_v4" />
+                <ScalarProperty Name="ip_v6" ColumnName="ip_v6" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service_Other">
+            <EntityTypeMapping TypeName="MyBDModel.Service_Other">
+              <MappingFragment StoreEntitySet="Service_Other">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="tariff" ColumnName="tariff" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service_Other_Type">
+            <EntityTypeMapping TypeName="MyBDModel.Service_Other_Type">
+              <MappingFragment StoreEntitySet="Service_Other_Type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service_TV">
+            <EntityTypeMapping TypeName="MyBDModel.Service_TV">
+              <MappingFragment StoreEntitySet="Service_TV">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="tariff" ColumnName="tariff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MyBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tariff">
+            <EntityTypeMapping TypeName="MyBDModel.Tariff">
+              <MappingFragment StoreEntitySet="Tariff">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tv_bundle">
+            <EntityTypeMapping TypeName="MyBDModel.Tv_bundle">
+              <MappingFragment StoreEntitySet="Tv_bundle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tv_bundle_channel">
+            <EntityTypeMapping TypeName="MyBDModel.Tv_bundle_channel">
+              <MappingFragment StoreEntitySet="Tv_bundle_channel">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="channel" ColumnName="channel" />
+                <ScalarProperty Name="bundle" ColumnName="bundle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tv_channel">
+            <EntityTypeMapping TypeName="MyBDModel.Tv_channel">
+              <MappingFragment StoreEntitySet="Tv_channel">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tv_Service_bundle">
+            <EntityTypeMapping TypeName="MyBDModel.Tv_Service_bundle">
+              <MappingFragment StoreEntitySet="Tv_Service_bundle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="bundle" ColumnName="bundle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Cl">
+            <EntityTypeMapping TypeName="MyBDModel.Type_Cl">
+              <MappingFragment StoreEntitySet="Type_Cl">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сontract_table">
+            <EntityTypeMapping TypeName="MyBDModel.Сontract_table">
+              <MappingFragment StoreEntitySet="Сontract_table">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="Date_Begin" ColumnName="Date_Begin" />
+                <ScalarProperty Name="Date_End" ColumnName="Date_End" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Client_Services">
+            <EntityTypeMapping TypeName="MyBDModel.View_Client_Services">
+              <MappingFragment StoreEntitySet="View_Client_Services">
+                <ScalarProperty Name="Клиент" ColumnName="Клиент" />
+                <ScalarProperty Name="Номер_договора" ColumnName="Номер договора" />
+                <ScalarProperty Name="Номер_Net" ColumnName="Номер Net" />
+                <ScalarProperty Name="Номер_других_услуг" ColumnName="Номер других услуг" />
+                <ScalarProperty Name="Номер_TV" ColumnName="Номер TV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_legal_entities">
+            <EntityTypeMapping TypeName="MyBDModel.View_legal_entities">
+              <MappingFragment StoreEntitySet="View_legal_entities">
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Представитель" ColumnName="Представитель" />
+                <ScalarProperty Name="БИК" ColumnName="БИК" />
+                <ScalarProperty Name="Номер_Счета" ColumnName="Номер Счета" />
+                <ScalarProperty Name="Номер_договора" ColumnName="Номер договора" />
+                <ScalarProperty Name="Дата_подписания" ColumnName="Дата подписания" />
+                <ScalarProperty Name="Дата_окнчания" ColumnName="Дата окнчания" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="Хранилище MyBDModel.Function1" FunctionImportName="Function1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyBDModel.Function1_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
