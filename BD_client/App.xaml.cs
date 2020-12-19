@@ -13,5 +13,6 @@ namespace BD_client
     /// </summary>
     public partial class App : Application
     {
+       
     }
 }

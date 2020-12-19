@@ -23,7 +23,7 @@
         <CollectionViewSource x:Key="tv_channelViewSource" Source="{Binding Tv_channel, Source={StaticResource myBDDataSet}}"/>
         <CollectionViewSource x:Key="tv_bundleViewSource" Source="{Binding Tv_bundle, Source={StaticResource myBDDataSet}}"/>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="root">
         <TabControl Height="392" Margin="0,27,0,0" VerticalAlignment="Top">
             <TabItem Header="Основные таблицы">
                 <Grid Background="#FFE5E5E5">

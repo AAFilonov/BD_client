@@ -21,9 +21,39 @@ namespace BD_client
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
+        UserModel _user;
+        public MainWindow( UserModel user)
+        {
+            
+
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
+            _user = user;
+            
+            this.Title += ":" + user.Login;
+
+          
         }
         BD_client.MyBDDataSet myBDDataSet;
 
@@ -42,7 +72,22 @@ namespace BD_client
         BD_client.MyBDDataSetTableAdapters.RegionTableAdapter myBDDataSetRegionTableAdapter;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            switch (_user.Role)
+            {
+                case 2: //admin
+                    break;
+                case 1: //operator
+                    break;
+                case 0: //user
+                    IEnumerable<TextBox> collection = root.Children.OfType<TextBox>();
 
+                    foreach (DataGrid dg in FindVisualChildren<DataGrid>(this))
+                    {
+                        dg.IsReadOnly = true;
+                    }
+
+                    break;
+            }
             myBDDataSet = ((BD_client.MyBDDataSet)(this.FindResource("myBDDataSet")));
            
 
