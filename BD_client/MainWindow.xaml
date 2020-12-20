@@ -22,6 +22,9 @@
         <CollectionViewSource x:Key="service_OtherViewSource" Source="{Binding Service_Other, Source={StaticResource myBDDataSet}}"/>
         <CollectionViewSource x:Key="tv_channelViewSource" Source="{Binding Tv_channel, Source={StaticResource myBDDataSet}}"/>
         <CollectionViewSource x:Key="tv_bundleViewSource" Source="{Binding Tv_bundle, Source={StaticResource myBDDataSet}}"/>
+        <CollectionViewSource x:Key="usersViewSource" Source="{Binding Users, Source={StaticResource myBDDataSet}}"/>
+        <CollectionViewSource x:Key="tv_bundle_channelViewSource" Source="{Binding Tv_bundle_channel, Source={StaticResource myBDDataSet}}"/>
+        <CollectionViewSource x:Key="tv_Service_bundleViewSource" Source="{Binding Tv_Service_bundle, Source={StaticResource myBDDataSet}}"/>
     </Window.Resources>
     <Grid x:Name="root">
         <TabControl Height="392" Margin="0,27,0,0" VerticalAlignment="Top">
@@ -84,14 +87,41 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="ClientSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="ClientSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="ClientDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
+                                    <Button x:Name="ClientPreview" Content="Предпросмотр печати" Margin="2" Width="auto" Click="PreviewClientButton_Click"></Button>
+                                    <Button x:Name="ClientPrint" Content="Печать выбранного" Margin="2" Width="auto" Click="PrintButton_Click"></Button>
+                                    <Grid Width="auto" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            <ColumnDefinition  Width="auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                      
+                                        <ComboBox     x:Name="filterType" Grid.Column="1" Margin="4"  MinWidth="80" Width="auto" SelectionChanged="filterType_SelectionChanged"></ComboBox>
+
+
+                                    </Grid>
+                                    <Grid Width="auto" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition  Width="auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label HorizontalAlignment="Right" Margin="2" Grid.Column="0" >Поиск:</Label>
+                                        <TextBox x:Name="ClientSearchTextBox" HorizontalAlignment="Right" Grid.Column="1"  Width="120" Margin="4" TextChanged="ClientSearchTextBox_TextChanged"></TextBox>
+                                    </Grid>
+
                                 </StackPanel>
-                                <DataGrid x:Name="clientDataGrid"  Grid.Row="1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid x:Name="clientDataGrid"  Grid.Row="1" AutoGenerateColumns="False" 
+                                          EnableRowVirtualization="True" ItemsSource="{Binding}"
+                                          
+                                          RowDetailsVisibilityMode="VisibleWhenSelected">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn x:Name="idColumn6" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
+                          
                                         <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="name" Width="SizeToHeader"/>
                                         <DataGridTextColumn x:Name="passport_NumColumn" Binding="{Binding passport_Num}" Header="passport Num" Width="SizeToHeader"/>
+                                        <DataGridTextColumn  x:Name="emailColumn"  Binding="{Binding email}" Header="email" Width="SizeToHeader" />
                                         <DataGridTextColumn x:Name="passport_SeriaColumn" Binding="{Binding passport_Seria}" Header="passport Seria" Width="SizeToHeader"/>
                                         <DataGridTextColumn x:Name="typeColumn1" Binding="{Binding type}" Header="type" Width="SizeToHeader"/>
                                         <DataGridTextColumn x:Name="legal_entityColumn" Binding="{Binding legal_entity}" Header="legal entity" Width="SizeToHeader"/>
@@ -123,7 +153,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="ContractSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="ContractSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="ContractDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="сontractDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -161,7 +191,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="ConPointSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="ConPointSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="ConPointDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
 
@@ -188,7 +218,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="AdresstSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="AdresstSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="AdressDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
 
@@ -221,7 +251,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="ServiceNetSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="ServiceNetSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="ServiceNetDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
 
@@ -248,7 +278,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="ServiceTVSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="ServiceTVSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="ServiceTVDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="service_TVDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.Row="1"  Grid.RowSpan="2" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -258,6 +288,32 @@
                                         <DataGridTextColumn x:Name="tariffColumn1" Binding="{Binding tariff}" Header="tariff" Width="SizeToHeader"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Связь ТВ-Пакет">
+                            <Grid Background="#FFE5E5E5" DataContext="{StaticResource tv_Service_bundleViewSource}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+
+                                    <Button x:Name="tv_Service_bundleSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="tv_Service_bundleDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
+                                </StackPanel>
+                                <DataGrid x:Name="tv_Service_bundleDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn x:Name="idColumn14" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="serviceColumn" Binding="{Binding service}" Header="service" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="bundleColumn1" Binding="{Binding bundle}" Header="bundle" Width="SizeToHeader"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
 
                             </Grid>
                         </TabItem>
@@ -273,7 +329,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="ServiceOtherSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="ServiceOtherSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="ServiceOtherDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="service_OtherDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.Row="1"  Grid.RowSpan="2" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -307,7 +363,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="Type_ClSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="Type_ClSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="Type_ClDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
 
@@ -331,7 +387,7 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                    <Button x:Name="TV_ChanelSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="TV_ChanelSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="TV_ChanelDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="tv_channelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -355,7 +411,7 @@
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                    <Button x:Name="TV_BundleSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="TV_BundleSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="TV_BundleClDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="tv_bundleDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -363,6 +419,33 @@
                                         <DataGridTextColumn x:Name="idColumn11" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
                                         <DataGridTextColumn x:Name="nameColumn3" Binding="{Binding name}" Header="name" Width="SizeToHeader"/>
                                         <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding description}" Header="description" Width="SizeToHeader"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+
+                            </Grid>
+
+                        </TabItem>
+                        <TabItem Header="Связь Пакет-Канал">
+                            <Grid Background="#FFE5E5E5" DataContext="{StaticResource tv_bundle_channelViewSource}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+
+                                    <Button x:Name="tv_bundle_channelSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="tv_bundle_channelDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
+                                </StackPanel>
+                                <DataGrid x:Name="tv_bundle_channelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn x:Name="idColumn13" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="channelColumn" Binding="{Binding channel}" Header="channel" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="bundleColumn" Binding="{Binding bundle}" Header="bundle" Width="SizeToHeader"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 
@@ -382,7 +465,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
 
-                                    <Button x:Name="RegionSave" Content="Сохранить изменения" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                                    <Button x:Name="RegionSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
                                     <Button x:Name="RegionDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
                                 </StackPanel>
 
@@ -395,10 +478,40 @@
                             </Grid>
 
                         </TabItem>
+
+
+
                     </TabControl>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="SystemTables" IsEnabled="False" Header="Системные таблицы">
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource usersViewSource}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
 
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+
+                        <Button x:Name="UserSave" Content="Сохранить" Margin="2" Width="auto" Click="saveButton_Click"></Button>
+                        <Button x:Name="UserDelete" Content="Удалить выбранный" Margin="2" Width="auto" Click="deleteButton_Click"></Button>
+                    </StackPanel>
+
+                    <DataGrid x:Name="usersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="idColumn12" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="roleColumn" Binding="{Binding role}" Header="role" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="loginColumn" Binding="{Binding login}" Header="login" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding password}" Header="password" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+
+            </TabItem>
         </TabControl>
 
     </Grid>

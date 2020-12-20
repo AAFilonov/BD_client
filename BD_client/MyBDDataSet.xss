@@ -7,7 +7,7 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="0" ViewPortY="0" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:Adress" ZOrder="44" X="970" Y="70" Height="134" Width="183" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignTable:Client" ZOrder="43" X="369" Y="943" Height="191" Width="178" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:Client" ZOrder="43" X="369" Y="943" Height="210" Width="178" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:Con_point" ZOrder="42" X="697" Y="70" Height="115" Width="203" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
     <Shape ID="DesignTable:Legal_entity" ZOrder="41" X="617" Y="943" Height="153" Width="214" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:Region" ZOrder="40" X="1223" Y="70" Height="115" Width="185" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
@@ -32,8 +32,8 @@
     <Shape ID="DesignTable:Input_Natural_person_data" ZOrder="21" X="4169" Y="70" Height="96" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="46" />
     <Shape ID="DesignTable:Function1" ZOrder="20" X="4539" Y="70" Height="96" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="46" />
     <Shape ID="DesignTable:View_Client_Info" ZOrder="2" X="5181" Y="70" Height="286" Width="240" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
-    <Shape ID="DesignSources:QueriesTableAdapter" ZOrder="3" X="4811" Y="70" Height="162" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="16" />
     <Shape ID="DesignTable:Users" ZOrder="1" X="5491" Y="70" Height="153" Width="176" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
+    <Shape ID="DesignSources:QueriesTableAdapter" ZOrder="3" X="4811" Y="70" Height="162" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="16" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_Adr_info_Region" ZOrder="19" LineWidth="11">
@@ -72,7 +72,7 @@
         </Point>
         <Point>
           <X>530</X>
-          <Y>1134</Y>
+          <Y>1153</Y>
         </Point>
       </RoutePoints>
     </Connector>

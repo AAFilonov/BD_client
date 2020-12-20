@@ -1609,6 +1609,8 @@ namespace BD_client {
             
             private global::System.Data.DataColumn columnlegal_entity;
             
+            private global::System.Data.DataColumn columnemail;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ClientDataTable() {
@@ -1692,6 +1694,14 @@ namespace BD_client {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn emailColumn {
+                get {
+                    return this.columnemail;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1727,7 +1737,7 @@ namespace BD_client {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ClientRow AddClientRow(string name, string passport_Num, string passport_Seria, Type_ClRow parentType_ClRowByFK_Cl_Type, Legal_entityRow parentLegal_entityRowByFK_CL_LE) {
+            public ClientRow AddClientRow(string name, string passport_Num, string passport_Seria, Type_ClRow parentType_ClRowByFK_Cl_Type, Legal_entityRow parentLegal_entityRowByFK_CL_LE, string email) {
                 ClientRow rowClientRow = ((ClientRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1735,7 +1745,8 @@ namespace BD_client {
                         passport_Num,
                         passport_Seria,
                         null,
-                        null};
+                        null,
+                        email};
                 if ((parentType_ClRowByFK_Cl_Type != null)) {
                     columnValuesArray[4] = parentType_ClRowByFK_Cl_Type[0];
                 }
@@ -1777,6 +1788,7 @@ namespace BD_client {
                 this.columnpassport_Seria = base.Columns["passport_Seria"];
                 this.columntype = base.Columns["type"];
                 this.columnlegal_entity = base.Columns["legal_entity"];
+                this.columnemail = base.Columns["email"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1794,6 +1806,8 @@ namespace BD_client {
                 base.Columns.Add(this.columntype);
                 this.columnlegal_entity = new global::System.Data.DataColumn("legal_entity", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlegal_entity);
+                this.columnemail = new global::System.Data.DataColumn("email", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnemail);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -1807,6 +1821,7 @@ namespace BD_client {
                 this.columnpassport_Num.MaxLength = 6;
                 this.columnpassport_Seria.MaxLength = 4;
                 this.columntype.AllowDBNull = false;
+                this.columnemail.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9422,6 +9437,22 @@ namespace BD_client {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string email {
+                get {
+                    try {
+                        return ((string)(this[this.tableClient.emailColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'email\' в таблице \'Client\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableClient.emailColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Legal_entityRow Legal_entityRow {
                 get {
                     return ((Legal_entityRow)(this.GetParentRow(this.Table.ParentRelations["FK_CL_LE"])));
@@ -9476,6 +9507,18 @@ namespace BD_client {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setlegal_entityNull() {
                 this[this.tableClient.legal_entityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsemailNull() {
+                return this.IsNull(this.tableClient.emailColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetemailNull() {
+                this[this.tableClient.emailColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12930,10 +12973,11 @@ namespace BD_client.MyBDDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("passport_Seria", "passport_Seria");
             tableMapping.ColumnMappings.Add("type", "type");
             tableMapping.ColumnMappings.Add("legal_entity", "legal_entity");
+            tableMapping.ColumnMappings.Add("email", "email");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Client] WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_passport_Num = 1 AND [passport_Num] IS NULL) OR ([passport_Num] = @Original_passport_Num)) AND ((@IsNull_passport_Seria = 1 AND [passport_Seria] IS NULL) OR ([passport_Seria] = @Original_passport_Seria)) AND ([type] = @Original_type) AND ((@IsNull_legal_entity = 1 AND [legal_entity] IS NULL) OR ([legal_entity] = @Original_legal_entity)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Client] WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_passport_Num = 1 AND [passport_Num] IS NULL) OR ([passport_Num] = @Original_passport_Num)) AND ((@IsNull_passport_Seria = 1 AND [passport_Seria] IS NULL) OR ([passport_Seria] = @Original_passport_Seria)) AND ([type] = @Original_type) AND ((@IsNull_legal_entity = 1 AND [legal_entity] IS NULL) OR ([legal_entity] = @Original_legal_entity)) AND ((@IsNull_email = 1 AND [email] IS NULL) OR ([email] = @Original_email)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -12944,26 +12988,30 @@ namespace BD_client.MyBDDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_legal_entity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "legal_entity", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_legal_entity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "legal_entity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_email", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Client] ([name], [passport_Num], [passport_Seria], [type], [legal_entity]) VALUES (@name, @passport_Num, @passport_Seria, @type, @legal_entity);
-SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WHERE (id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Client] ([name], [passport_Num], [passport_Seria], [type], [legal_entity], [email]) VALUES (@name, @passport_Num, @passport_Seria, @type, @legal_entity, @email);
+SELECT id, name, passport_Num, passport_Seria, type, legal_entity, email FROM Client WHERE (id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@passport_Num", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "passport_Num", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@passport_Seria", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "passport_Seria", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@legal_entity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "legal_entity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Client] SET [name] = @name, [passport_Num] = @passport_Num, [passport_Seria] = @passport_Seria, [type] = @type, [legal_entity] = @legal_entity WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_passport_Num = 1 AND [passport_Num] IS NULL) OR ([passport_Num] = @Original_passport_Num)) AND ((@IsNull_passport_Seria = 1 AND [passport_Seria] IS NULL) OR ([passport_Seria] = @Original_passport_Seria)) AND ([type] = @Original_type) AND ((@IsNull_legal_entity = 1 AND [legal_entity] IS NULL) OR ([legal_entity] = @Original_legal_entity)));
-SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WHERE (id = @id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Client] SET [name] = @name, [passport_Num] = @passport_Num, [passport_Seria] = @passport_Seria, [type] = @type, [legal_entity] = @legal_entity, [email] = @email WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_passport_Num = 1 AND [passport_Num] IS NULL) OR ([passport_Num] = @Original_passport_Num)) AND ((@IsNull_passport_Seria = 1 AND [passport_Seria] IS NULL) OR ([passport_Seria] = @Original_passport_Seria)) AND ([type] = @Original_type) AND ((@IsNull_legal_entity = 1 AND [legal_entity] IS NULL) OR ([legal_entity] = @Original_legal_entity)) AND ((@IsNull_email = 1 AND [email] IS NULL) OR ([email] = @Original_email)));
+SELECT id, name, passport_Num, passport_Seria, type, legal_entity, email FROM Client WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@passport_Num", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "passport_Num", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@passport_Seria", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "passport_Seria", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@legal_entity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "legal_entity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_passport_Num", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "passport_Num", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -12973,6 +13021,8 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_legal_entity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "legal_entity", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_legal_entity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "legal_entity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_email", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_email", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "email", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -12989,8 +13039,8 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM dbo.Client" +
-                "";
+            this._commandCollection[0].CommandText = "SELECT id, name, passport_Num, passport_Seria, type, legal_entity, email FROM Cli" +
+                "ent";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -13051,7 +13101,7 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id, string Original_name, string Original_passport_Num, string Original_passport_Seria, int Original_type, global::System.Nullable<int> Original_legal_entity) {
+        public virtual int Delete(int Original_id, string Original_name, string Original_passport_Num, string Original_passport_Seria, int Original_type, global::System.Nullable<int> Original_legal_entity, string Original_email) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
@@ -13084,6 +13134,14 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
+            if ((Original_email == null)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_email));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13104,7 +13162,7 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, string passport_Num, string passport_Seria, int type, global::System.Nullable<int> legal_entity) {
+        public virtual int Insert(string name, string passport_Num, string passport_Seria, int type, global::System.Nullable<int> legal_entity, string email) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -13130,6 +13188,12 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
+            if ((email == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(email));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13150,7 +13214,7 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, string passport_Num, string passport_Seria, int type, global::System.Nullable<int> legal_entity, int Original_id, string Original_name, string Original_passport_Num, string Original_passport_Seria, int Original_type, global::System.Nullable<int> Original_legal_entity, int id) {
+        public virtual int Update(string name, string passport_Num, string passport_Seria, int type, global::System.Nullable<int> legal_entity, string email, int Original_id, string Original_name, string Original_passport_Num, string Original_passport_Seria, int Original_type, global::System.Nullable<int> Original_legal_entity, string Original_email, int id) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -13176,39 +13240,53 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_id));
+            if ((email == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(email));
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_name));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_name));
             }
             if ((Original_passport_Num == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_passport_Num));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_passport_Num));
             }
             if ((Original_passport_Seria == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_passport_Seria));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_passport_Seria));
             }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_type));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_type));
             if ((Original_legal_entity.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_legal_entity.Value));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_legal_entity.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(id));
+            if ((Original_email == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_email));
+            }
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13229,8 +13307,8 @@ SELECT id, name, passport_Num, passport_Seria, type, legal_entity FROM Client WH
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, string passport_Num, string passport_Seria, int type, global::System.Nullable<int> legal_entity, int Original_id, string Original_name, string Original_passport_Num, string Original_passport_Seria, int Original_type, global::System.Nullable<int> Original_legal_entity) {
-            return this.Update(name, passport_Num, passport_Seria, type, legal_entity, Original_id, Original_name, Original_passport_Num, Original_passport_Seria, Original_type, Original_legal_entity, Original_id);
+        public virtual int Update(string name, string passport_Num, string passport_Seria, int type, global::System.Nullable<int> legal_entity, string email, int Original_id, string Original_name, string Original_passport_Num, string Original_passport_Seria, int Original_type, global::System.Nullable<int> Original_legal_entity, string Original_email) {
+            return this.Update(name, passport_Num, passport_Seria, type, legal_entity, email, Original_id, Original_name, Original_passport_Num, Original_passport_Seria, Original_type, Original_legal_entity, Original_email, Original_id);
         }
     }
     
