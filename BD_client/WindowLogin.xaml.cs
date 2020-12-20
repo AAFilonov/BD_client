@@ -30,7 +30,7 @@ namespace BD_client
         public WindowLogin()
         {
             InitializeComponent();
-            texBoxDBString.Text = ConfigurationManager.ConnectionStrings["default"].ConnectionString;
+            texBoxDBString.Text = ConfigurationManager.ConnectionStrings["BD_client.Properties.Settings.MyBDConnectionString"].ConnectionString;
 
         }
         UserModel user;
@@ -45,7 +45,7 @@ namespace BD_client
                     string sql = "SELECT * FROM Users where login = '" + texBoxLogin.Text + "' AND [password] = '" + PasswordBox.Password + "'";
                     try
                     {
-                    connectionString = ConfigurationManager.ConnectionStrings["default"].ConnectionString;                 
+                    connectionString = ConfigurationManager.ConnectionStrings["BD_client.Properties.Settings.MyBDConnectionString"].ConnectionString;                 
                     connection = new SqlConnection(connectionString);
                         SqlCommand command = new SqlCommand(sql, connection);
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -85,7 +85,7 @@ namespace BD_client
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
             if (chb.IsChecked==false) {
-                var settings = ConfigurationManager.ConnectionStrings["default"];
+                var settings = ConfigurationManager.ConnectionStrings["BD_client.Properties.Settings.MyBDConnectionString"];
 
                 var fi = typeof(ConfigurationElement).GetField("_bReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
                 fi.SetValue(settings, false);
