@@ -7,15 +7,21 @@
         mc:Ignorable="d"
         Title="WindowLogin" Height="450" Width="800" >
     <Grid x:Name="root">
-        <StackPanel Width="300"  HorizontalAlignment="Center" Margin="246,189,246,41" >
+        <StackPanel x:Name="panellogin" Width="300"  VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="246,0,246,0" >
 
             <Label HorizontalAlignment="Center">Логин</Label>
             <TextBox x:Name="texBoxLogin" Margin="4" Height="25" Text="" />
             <Label HorizontalAlignment="Center">Пароль:</Label>
             <PasswordBox x:Name="PasswordBox"   Height="25" Margin="4"/>
             <Button x:Name="ClientDelete" Width="150" VerticalAlignment="Bottom" Content="Войти" Margin="2 10 2 0 "  Click="LoginTry"></Button>
-
+            <Label Height="49" ></Label>
+            <Label HorizontalAlignment="Center">Строка соединения с Базой данных</Label>
+            <CheckBox x:Name="chb" HorizontalAlignment="Center" IsChecked="True" Click="CheckBox_Checked">Использовать строку по умолчанию</CheckBox>
+            <TextBox x:Name="texBoxDBString" Margin="4"  IsEnabled="false" TextWrapping="Wrap" Height="auto" Text="" />
+            <Button x:Name="okButton" Width="150" VerticalAlignment="Bottom" Content="Изменить" Margin="2 10 2 0 " Click="okButton_Click"  ></Button>
+            <Label x:Name="labelbd" Visibility="Hidden"  HorizontalAlignment="Center">Строка соединения с базой данных изменена</Label>
         </StackPanel>
+        
 
 
 

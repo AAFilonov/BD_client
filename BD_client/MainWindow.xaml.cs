@@ -187,6 +187,7 @@ namespace BD_client
             }
 
             clientViewSource.Source = clients;
+
             clientViewSource.Filter += ClientViewSource_Filter;
 
 
