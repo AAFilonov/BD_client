@@ -320,60 +320,67 @@ namespace BD_client
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             if (_user.Role == 0) return;
-
-          var b  =(Button)sender;
-            switch (b.Name)
+            try
             {
-                case "ClientSave":
-                    myBDDataSetClientTableAdapter.Update(myBDDataSet.Client);
-                    break;
-                case "ContractSave":
-                    myBDDataSetСontract_tableTableAdapter.Update(myBDDataSet.Сontract_table);
-                    break;
-                case "ConPointSave":
-                    myBDDataSetCon_pointTableAdapter.Update(myBDDataSet.Con_point);
-                    break;
-                case "AdressSave":
-                    myBDDataSetAdressTableAdapter.Update(myBDDataSet.Adress);
-                    break;             
-                case "ServiceNetSave":
-                    myBDDataSetService_NetTableAdapter.Update(myBDDataSet.Service_Net);
-                    break;
-                case "ServiceTVSave":
-                    myBDDataSetService_TVTableAdapter.Update(myBDDataSet.Service_TV);
-                    break;
-                case "ServiceOtherSave":
-                    myBDDataSetService_OtherTableAdapter.Update(myBDDataSet.Service_Other);
-                    break;
-                case "Type_ClSave":
-                    myBDDataSetType_ClTableAdapter.Update(myBDDataSet.Type_Cl);
-                    break;
-                case "TV_ChanelSave":
-                    myBDDataSetTv_channelTableAdapter.Update(myBDDataSet.Tv_channel);
-                    break;
-                case "TV_BundleSave":
-                    myBDDataSetTv_bundleTableAdapter.Update(myBDDataSet.Tv_bundle);
-                    break;
-                case "RegionSave":
-                    myBDDataSetRegionTableAdapter.Update(myBDDataSet.Region);
-                    break;
+                var b = (Button)sender;
+                switch (b.Name)
+                {
+                    case "ClientSave":
+                        myBDDataSetClientTableAdapter.Update(myBDDataSet.Client);
+                        break;
+                    case "ContractSave":
+                        myBDDataSetСontract_tableTableAdapter.Update(myBDDataSet.Сontract_table);
+                        break;
+                    case "ConPointSave":
+                        myBDDataSetCon_pointTableAdapter.Update(myBDDataSet.Con_point);
+                        break;
+                    case "AdressSave":
+                        myBDDataSetAdressTableAdapter.Update(myBDDataSet.Adress);
+                        break;
+                    case "ServiceNetSave":
+                        myBDDataSetService_NetTableAdapter.Update(myBDDataSet.Service_Net);
+                        break;
+                    case "ServiceTVSave":
+                        myBDDataSetService_TVTableAdapter.Update(myBDDataSet.Service_TV);
+                        break;
+                    case "ServiceOtherSave":
+                        myBDDataSetService_OtherTableAdapter.Update(myBDDataSet.Service_Other);
+                        break;
+                    case "Type_ClSave":
+                        myBDDataSetType_ClTableAdapter.Update(myBDDataSet.Type_Cl);
+                        break;
+                    case "TV_ChanelSave":
+                        myBDDataSetTv_channelTableAdapter.Update(myBDDataSet.Tv_channel);
+                        break;
+                    case "TV_BundleSave":
+                        myBDDataSetTv_bundleTableAdapter.Update(myBDDataSet.Tv_bundle);
+                        break;
+                    case "RegionSave":
+                        myBDDataSetRegionTableAdapter.Update(myBDDataSet.Region);
+                        break;
 
-                case "userSave":
-                    myBDDataSetUsersTableAdapter.Update(myBDDataSet.Users );
-                    break;
-                case "tv_bundle_channelSave":
-                    myBDDataSetTv_bundle_channelTableAdapter.Update(myBDDataSet.Tv_bundle_channel);
-                    break;
-                case "tv_Service_bundleSave":
-                    myBDDataSetTv_Service_bundleTableAdapter.Update(myBDDataSet.Tv_Service_bundle);
-                    break;
-                    
+                    case "userSave":
+                        myBDDataSetUsersTableAdapter.Update(myBDDataSet.Users);
+                        break;
+                    case "tv_bundle_channelSave":
+                        myBDDataSetTv_bundle_channelTableAdapter.Update(myBDDataSet.Tv_bundle_channel);
+                        break;
+                    case "tv_Service_bundleSave":
+                        myBDDataSetTv_Service_bundleTableAdapter.Update(myBDDataSet.Tv_Service_bundle);
+                        break;
 
 
 
 
-                default:
-                    throw new ArgumentOutOfRangeException(b.Name);
+
+                    default:
+                        throw new ArgumentOutOfRangeException(b.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                MessageBox.Show("Не удалось сохранить изменения из за некорректности значений");
             }
           
         }
@@ -457,16 +464,23 @@ namespace BD_client
 
         private void ClientViewSource_Filter(object sender, FilterEventArgs e)
         {
-            var row = ((Client)e.Item).name;
-            var text = ClientSearchTextBox.Text;
+            if (((Client)e.Item).name != null)
+            {
+                var row = ((Client)e.Item).name;
+                var text = ClientSearchTextBox.Text;
 
-            e.Accepted = row.Contains(text);
+                e.Accepted = row.Contains(text);
+            }
         }
 
 
         private void ClientSearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+     
+
             clientViewSource.View.Refresh();
+          
+            clientDataGrid.ItemsSource = clientViewSource.View;
         }
 
         private void filterType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -483,11 +497,36 @@ namespace BD_client
                     command.CommandText = "getClient_by_type";
                     command.Parameters.AddWithValue("@type", filterType.SelectedIndex);
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
-
+                 
                     DataTable result = new DataTable();
                     connection.Open();
-                    adapter.Fill(result);
-                    clientDataGrid.ItemsSource = result.DefaultView;
+                    myBDDataSet.Client.Clear();
+                    adapter.Fill(myBDDataSet.Client);
+
+
+                    var clients = new ObservableCollection<Client>();
+                    foreach (DataRow row in myBDDataSet.Client.Rows)
+                    {
+                        var obj = new Client();
+                        obj.id = (int)row["id"];
+                        obj.type = (int)row["type"];
+                        if (row["email"] != DBNull.Value)
+                            obj.email = (string)row["email"];
+
+                        obj.name = (string)row["name"];
+                        obj.passport_Seria = (string)row["passport_Seria"];
+                        obj.passport_Num = (string)row["passport_Num"];
+                        if (row["legal_entity"] != DBNull.Value)
+                            obj.legal_entity = (int?)row["legal_entity"];
+                        clients.Add(obj);
+                    }
+
+                    clientViewSource.Source = clients;
+
+
+                    //clientDataGrid.ItemsSource = result.DefaultView;
+                    ClientSearchTextBox_TextChanged(null, null);
+
                 }
                 catch (Exception ex)
                 {
@@ -496,7 +535,30 @@ namespace BD_client
             }
             else
             {
-                clientDataGrid.ItemsSource = myBDDataSet.Client;
+
+
+                myBDDataSetClientTableAdapter.Fill(myBDDataSet.Client);
+
+                var clients = new ObservableCollection<Client>();
+                foreach (DataRow row in myBDDataSet.Client.Rows)
+                {
+                    var obj = new Client();
+                    obj.id = (int)row["id"];
+                    obj.type = (int)row["type"];
+                    if (row["email"] != DBNull.Value)
+                        obj.email = (string)row["email"];
+
+                    obj.name = (string)row["name"];
+                    obj.passport_Seria = (string)row["passport_Seria"];
+                    obj.passport_Num = (string)row["passport_Num"];
+                    if (row["legal_entity"] != DBNull.Value)
+                        obj.legal_entity = (int?)row["legal_entity"];
+                    clients.Add(obj);
+                }
+
+                clientViewSource.Source = clients;
+                ClientSearchTextBox_TextChanged(null, null);
+
             }
         }
         private Font PrintFont;
