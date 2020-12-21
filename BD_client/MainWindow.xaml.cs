@@ -62,17 +62,17 @@ namespace BD_client
         }
 
         UserModel _user;
-        public MainWindow( UserModel user)
+        public MainWindow(UserModel user)
         {
-            
+
 
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
             _user = user;
-            
+
             this.Title += ":" + user.Login;
 
-          
+
         }
         BD_client.MyBDDataSet myBDDataSet;
         //основные
@@ -122,7 +122,7 @@ namespace BD_client
                 case 0: //user
                     SystemTables.Visibility = Visibility.Hidden;
 
-                    
+
                     dataGrids.Add(clientDataGrid);
                     dataGrids.Add(con_pointDataGrid);
                     dataGrids.Add(adressDataGrid);
@@ -131,9 +131,9 @@ namespace BD_client
                     dataGrids.Add(service_NetDataGrid);
                     dataGrids.Add(tv_Service_bundleDataGrid);
                     dataGrids.Add(service_OtherDataGrid);
-                 
 
-            
+
+
 
 
                     foreach (DataGrid dg in dataGrids)
@@ -283,7 +283,7 @@ namespace BD_client
             System.Windows.Data.CollectionViewSource tv_bundle_channelViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tv_bundle_channelViewSource")));
             tv_bundle_channelViewSource.View.MoveCurrentToFirst();
             // Загрузить данные в таблицу Tv_Service_bundle. Можно изменить этот код как требуется.
-             myBDDataSetTv_Service_bundleTableAdapter = new BD_client.MyBDDataSetTableAdapters.Tv_Service_bundleTableAdapter();
+            myBDDataSetTv_Service_bundleTableAdapter = new BD_client.MyBDDataSetTableAdapters.Tv_Service_bundleTableAdapter();
             myBDDataSetTv_Service_bundleTableAdapter.Fill(myBDDataSet.Tv_Service_bundle);
             System.Windows.Data.CollectionViewSource tv_Service_bundleViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tv_Service_bundleViewSource")));
             tv_Service_bundleViewSource.View.MoveCurrentToFirst();
@@ -316,7 +316,7 @@ namespace BD_client
 
         }
 
-  
+
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             if (_user.Role == 0) return;
@@ -379,10 +379,10 @@ namespace BD_client
             }
             catch (Exception ex)
             {
-               
+
                 MessageBox.Show("Не удалось сохранить изменения из за некорректности значений");
             }
-          
+
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -406,43 +406,43 @@ namespace BD_client
             }
             switch (b.Name)
             {
-                case "ClientDelete":                   
+                case "ClientDelete":
                     myBDDataSetClientTableAdapter.Update(myBDDataSet.Client);
                     break;
                 case "ContractDelete":
-               myBDDataSetСontract_tableTableAdapter.Update(myBDDataSet.Сontract_table);
+                    myBDDataSetСontract_tableTableAdapter.Update(myBDDataSet.Сontract_table);
                     break;
                 case "ConPointDelete":
-                myBDDataSetCon_pointTableAdapter.Update(myBDDataSet.Con_point);
+                    myBDDataSetCon_pointTableAdapter.Update(myBDDataSet.Con_point);
                     break;
                 case "AdressDelete":
-                  myBDDataSetAdressTableAdapter.Update(myBDDataSet.Adress);
+                    myBDDataSetAdressTableAdapter.Update(myBDDataSet.Adress);
                     break;
-                case "ServiceNetDelete":    
+                case "ServiceNetDelete":
                     myBDDataSetService_NetTableAdapter.Update(myBDDataSet.Service_Net);
                     break;
                 case "ServiceTVDelete":
-          
+
                     myBDDataSetService_TVTableAdapter.Update(myBDDataSet.Service_TV);
                     break;
                 case "ServiceOtherDelete":
-           
+
                     myBDDataSetService_OtherTableAdapter.Update(myBDDataSet.Service_Other);
                     break;
                 case "Type_ClSave":
-              
+
                     myBDDataSetType_ClTableAdapter.Update(myBDDataSet.Type_Cl);
                     break;
                 case "TV_ChanelSaveDelete":
-            
+
                     myBDDataSetTv_channelTableAdapter.Update(myBDDataSet.Tv_channel);
                     break;
                 case "TV_BundleDelete":
-      
+
                     myBDDataSetTv_bundleTableAdapter.Update(myBDDataSet.Tv_bundle);
                     break;
                 case "RegionDelete":
-                  
+
                     myBDDataSetRegionTableAdapter.Update(myBDDataSet.Region);
                     break;
                 case "UserDelete":
@@ -464,28 +464,42 @@ namespace BD_client
 
         private void ClientViewSource_Filter(object sender, FilterEventArgs e)
         {
+            bool is_filtered = true;
+            bool is_poisked = true;
+            if (filterType.SelectedIndex > 0)
+            {
+                is_filtered = ((Client)e.Item).type == filterType.SelectedIndex;
+            }
             if (((Client)e.Item).name != null)
             {
                 var row = ((Client)e.Item).name;
                 var text = ClientSearchTextBox.Text;
 
-                e.Accepted = row.Contains(text);
+
+                is_poisked = row.Contains(text);
             }
+            bool is_Accepted = is_filtered && is_poisked;
+            e.Accepted = is_Accepted;
         }
 
 
         private void ClientSearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-     
+
 
             clientViewSource.View.Refresh();
-          
+
             clientDataGrid.ItemsSource = clientViewSource.View;
         }
-
         private void filterType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (filterType.SelectedIndex!=0)
+            clientViewSource.View.Refresh();
+            return;
+        }
+        private void filterType_SelectionChanged1(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (filterType.SelectedIndex != 0)
             {
                 try
                 {
@@ -497,7 +511,7 @@ namespace BD_client
                     command.CommandText = "getClient_by_type";
                     command.Parameters.AddWithValue("@type", filterType.SelectedIndex);
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
-                 
+
                     DataTable result = new DataTable();
                     connection.Open();
                     myBDDataSet.Client.Clear();
@@ -530,7 +544,7 @@ namespace BD_client
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка:\n"+ ex.Message);
+                    MessageBox.Show("Ошибка:\n" + ex.Message);
                 }
             }
             else
@@ -570,11 +584,11 @@ namespace BD_client
 
 
             var dataRowView = clientDataGrid.SelectedItems[0] as DataRowView;
-            
+
             MyBDDataSet.ClientRow row = (MyBDDataSet.ClientRow)dataRowView.Row;
 
 
-            PrintFont = new Font("Arial",20);
+            PrintFont = new Font("Arial", 20);
             line = "Информация о клиенте:";
             ev.Graphics.DrawString(line, PrintFont, Brushes.Black, leftMargin, yPos, new StringFormat());
             yPos += PrintFont.GetHeight(ev.Graphics);
@@ -584,7 +598,7 @@ namespace BD_client
             line = $"ID = {row.id}\r\n" +
                    $"ФИО:= {row.name}\r\n" +
                    $"Паспорт: {row.passport_Seria}  {row.passport_Num} \r\n";
-                  
+
 
 
             ev.Graphics.DrawString(line, PrintFont, Brushes.Black, leftMargin, yPos, new StringFormat());
@@ -609,7 +623,7 @@ namespace BD_client
                 MessageBox.Show(ex.Message);
             }
         }
-    
+
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
             try
